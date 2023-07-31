@@ -58,7 +58,9 @@
         "height": 600,
         "resizable": true,
         "title": "Box Translator",
-        "width": 800
+        "width": 800,
+        "visible": false,
+        "transparent": true
       }
     ]
   }

@@ -1,8 +1,17 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod factories;
+mod lib_wrappers;
+mod app_configuration;
+mod util;
+use factories::app_factory;
+
 fn main() {
-  tauri::Builder::default()
-    .run(tauri::generate_context!())
-    .expect("error while running tauri application");
+  let app = app_factory::create_app();
+  if let Err(message) = app {
+      todo!("Need to handle app creation error: {}", message);
+  }
+  let app = app.unwrap();
+  app.run(|_, _| {});
 }
