@@ -35,15 +35,8 @@ impl WindowWrapper {
         Ok(self)
     }
 
-    pub fn set_decorations(
-        &mut self,
-        flag: bool,
-    ) -> Result<&mut WindowWrapper, Box<dyn std::error::Error>> {
+    pub fn set_decorations(&mut self, flag: bool) -> Result<&mut WindowWrapper, Box<dyn std::error::Error>> {
         self.window.set_decorations(flag)?;
         Ok(self)
-    }
-
-    pub fn take(self) -> Window {
-        self.window
     }
 }
