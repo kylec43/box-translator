@@ -1,27 +1,33 @@
-use crate::{
-    app_configuration::{ 
-        app_configurator_trait::AppConfiguratorTrait, 
-        app_configurator::AppConfigurator, 
-        minimal_configurator::MinimalConfigurator 
-    }, 
-    util::{
-        win_screen_util::WinScreenUtil, 
-        screen_util_trait::ScreenUtilTrait
-    }
+use crate::app_configuration::{ 
+    app_configurator_trait::AppConfiguratorTrait, 
+    app_configurator::AppConfigurator
 };
 
+use crate::util::screen_util_trait::ScreenUtilTrait;
 
-pub fn create_app_configurator(os: &str) -> Result<Box<dyn AppConfiguratorTrait>, Box<dyn std::error::Error>> {
-    match os {
-        "windows" => {
-            let screen_util = Box::new(WinScreenUtil::new());
-            let configurator = create_impl(screen_util);
-            return Ok(configurator);
-        },
-        other => return Err(format!("Error finding app configurator for this OS: {}", other).into())
-    }
+#[cfg(target_os = "windows")]
+use crate::util::win_screen_util::WinScreenUtil;
+
+#[cfg(target_os = "linux")]
+use crate::util::linux_screen_util::LinuxScreenUtil;
+
+
+#[cfg(target_os = "windows")]
+pub fn create_configurator() 
+-> Result<Box<dyn AppConfiguratorTrait>, Box<dyn std::error::Error>> {
+    let screen_util = Box::new(WinScreenUtil::new());
+    let configurator = create(screen_util);
+    Ok(configurator)
 }
 
-fn create_impl(screen_util: Box<dyn ScreenUtilTrait>) -> Box<dyn AppConfiguratorTrait> {
-    return Box::new(AppConfigurator::new(screen_util));
+#[cfg(target_os = "linux")]
+pub fn create_configurator() 
+-> Result<Box<dyn AppConfiguratorTrait>, Box<dyn std::error::Error>> {
+    let screen_util = Box::new(LinuxScreenUtil::new()?);
+    let configurator = create(screen_util);
+    Ok(configurator)
+}
+
+fn create(screen_util: Box<dyn ScreenUtilTrait>) -> Box<dyn AppConfiguratorTrait> {
+    Box::new(AppConfigurator::new(screen_util))
 }
