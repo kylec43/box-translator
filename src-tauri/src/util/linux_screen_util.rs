@@ -1,10 +1,9 @@
 extern crate x11;
+use super::screen_util_trait::ScreenUtilTrait;
 use x11::xlib::*;
 
-use super::screen_util_trait::ScreenUtilTrait;
-
 pub struct LinuxScreenUtil {
-    display: *mut _XDisplay
+    display: *mut _XDisplay,
 }
 
 impl LinuxScreenUtil {
@@ -12,12 +11,10 @@ impl LinuxScreenUtil {
         unsafe {
             let display = XOpenDisplay(std::ptr::null());
             if display.is_null() {
-                return Err("Unable to get XDisplay".into())
+                return Err("Unable to get XDisplay".into());
             }
-        
-            let screen_util = LinuxScreenUtil {
-                display
-            };
+
+            let screen_util = LinuxScreenUtil { display };
 
             Ok(screen_util)
         }

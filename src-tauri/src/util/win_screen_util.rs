@@ -1,5 +1,4 @@
 extern crate winapi;
-
 use super::screen_util_trait::ScreenUtilTrait;
 use winapi::um::winuser::{GetSystemMetrics, SM_CXSCREEN, SM_CYSCREEN};
 
