@@ -39,4 +39,12 @@ impl WindowWrapper {
         self.window.set_decorations(flag)?;
         Ok(self)
     }
+
+    pub fn get_physical_width(&self) -> Result<u32, Box<dyn std::error::Error>>  {
+        Ok(self.window.inner_size()?.width)
+    }
+
+    pub fn get_physical_height(&self) -> Result<u32, Box<dyn std::error::Error>> {
+        Ok(self.window.inner_size()?.height)
+    }
 }
