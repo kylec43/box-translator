@@ -1,6 +1,6 @@
 use tauri::{App, Builder, Wry};
 
-use crate::commands::system::{get_physical_screen_size, __cmd__get_physical_screen_size};
+use crate::commands::screen::{get_physical_screen_size, __cmd__get_physical_screen_size};
 
 pub fn create_app() -> Result<App, Box<dyn std::error::Error>> {
     let mut builder = tauri::Builder::default();
