@@ -6,6 +6,7 @@ import {
 } from "@tauri-apps/api/window";
 
 import { EventCallback, Event, UnlistenFn } from "@tauri-apps/api/event";
+import { IWindowDecoration } from "../decorators/Window/types";
 
 export class WindowWrapper {
     private appWindow: WebviewWindow;
@@ -34,7 +35,7 @@ export class WindowWrapper {
         return this;
     }
 
-    async getInnerSize(): Promise<PhysicalSize> {
+    async getSize(): Promise<PhysicalSize> {
         return await this.appWindow.innerSize();
     }
 
@@ -44,6 +45,11 @@ export class WindowWrapper {
 
     async listen<T>(event: string, handler: EventCallback<Event<T>>): Promise<UnlistenFn> {
         return await this.appWindow.listen<Event<T>>(event, handler);
+    }
+
+    applyDecoration(decoration: IWindowDecoration): Promise<void>;
+    applyDecoration(decoration: IWindowDecoration): Promise<void> {
+        return decoration.apply(this);
     }
 }
 
