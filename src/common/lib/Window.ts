@@ -47,7 +47,6 @@ export class WindowWrapper {
         return await this.appWindow.listen<Event<T>>(event, handler);
     }
 
-    applyDecoration(decoration: IWindowDecoration): Promise<void>;
     applyDecoration(decoration: IWindowDecoration): Promise<void> {
         return decoration.apply(this);
     }
