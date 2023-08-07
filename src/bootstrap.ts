@@ -6,6 +6,8 @@ bootstrap();
 async function bootstrap() {
     await appWindow.show();
 }
+
+// For testing
 window.onload = () => {
     window.onclick = () => {
         appWindow.setState(new MoveableState());
