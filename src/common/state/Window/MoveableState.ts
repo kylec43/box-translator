@@ -36,6 +36,7 @@ export class MoveableState implements IWindowState {
         const minWidth = this.config.minSize?.width ?? 400;
         const minHeight = this.config.minSize?.height ?? 50;
 
+        await this.window.setResizeable(true);
         await this.window.setDecorations(true);
         await this.window.setAlwaysOnTop(alwaysOnTop);
         await this.window.decorateWith(new Opacity(opacity));
