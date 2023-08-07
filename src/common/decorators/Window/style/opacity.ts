@@ -1,5 +1,5 @@
-import { WindowWrapper } from "../../../../lib/Window";
-import { IWindowDecoration } from "../../types";
+import { WindowWrapper } from "../../../lib/Window";
+import { IWindowDecoration } from "../types";
 
 
 export class Opacity implements IWindowDecoration {

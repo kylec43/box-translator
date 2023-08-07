@@ -1,6 +1,6 @@
-import { getScreenSize } from "../../../../ipc/invoke";
-import { WindowWrapper } from "../../../../lib/Window";
-import { IWindowDecoration } from "../../types";
+import { getScreenSize } from "../../../ipc/invoke";
+import { WindowWrapper } from "../../../lib/Window";
+import { IWindowDecoration } from "../types";
 
 
 export class FullScreenWidth implements IWindowDecoration {
