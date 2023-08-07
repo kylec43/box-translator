@@ -1,4 +1,3 @@
-import { UnlistenFn } from "@tauri-apps/api/event";
 import { WindowWrapper } from "../../lib/Window/Window";
 import { IWindowState, WindowStateConfig } from "./types";
 import { Opacity } from "../../decorators/Window/style/opacity";
@@ -7,7 +6,6 @@ import { WidthPercentage } from "../../decorators/Window/layout/size";
 export class FixedState implements IWindowState {
     protected config: WindowStateConfig;
     protected window?: WindowWrapper;
-    private fixedPosUnlistener?: UnlistenFn;
 
     constructor(config?: WindowStateConfig) {
         this.config = {
@@ -37,8 +35,7 @@ export class FixedState implements IWindowState {
         await this.window.setAlwaysOnTop(alwaysOnTop);
         await this.window.decorateWith(new Opacity(opacity));
         await this.setWindowSize();
-        this.setWindowPosition(posX, posY);
-        //await this.fixWindowToPositionWithListener(posX, posY);
+        this.window.setPosition(posX, posY);
         await this.window.setResizeable(false);
 
         const currentSize = await this.window.getSize();
@@ -61,29 +58,7 @@ export class FixedState implements IWindowState {
         this.window.setSize(width, height);
     }
 
-    private async fixWindowToPositionWithListener(posX: number, posY: number): Promise<void> {
-        this.assertWindowIsSet();
-
-        this.setWindowPosition(posX, posY);
-        const unlisten = await this.window.onMoved(event => {
-            this.setWindowPosition(posX, posY)
-        });
-
-        if (this.fixedPosUnlistener !== undefined) {
-            this.fixedPosUnlistener();
-        }
-
-        this.fixedPosUnlistener = unlisten;
-    }
-
-    private setWindowPosition(posX: number, posY: number): void {
-        this.assertWindowIsSet();
-        this.window.setPosition(posX, posY);
-    }
-
     cleanUp(): void {
-        if (this.fixedPosUnlistener !== undefined) {
-            this.fixedPosUnlistener();
-        }
+
     }
 }

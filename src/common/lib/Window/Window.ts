@@ -5,7 +5,6 @@ import {
     appWindow as tauriAppWindow
 } from "@tauri-apps/api/window";
 
-import { EventCallback, Event, UnlistenFn } from "@tauri-apps/api/event";
 import { IWindowDecoration } from "../../decorators/Window/types";
 import { IWindowState } from "../../state/Window/types";
 import { FixedState } from "../../state/Window/FixedState";
@@ -77,16 +76,8 @@ export class WindowWrapper {
         return this.appWindow.show();
     }
 
-    async listen<T>(event: string, handler: EventCallback<Event<T>>): Promise<UnlistenFn> {
-        return this.appWindow.listen<Event<T>>(event, handler);
-    }
-
     decorateWith(...decorations: IWindowDecoration[]): Promise<void[]> {
         return Promise.all(decorations.map(decoration => decoration.apply(this)));
-    }
-
-    onMoved(callback: EventCallback<PhysicalPosition>): Promise<UnlistenFn> {
-        return this.appWindow.onMoved(callback)
     }
 
     async setState(state: IWindowState): Promise<void> {
