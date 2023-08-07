@@ -2,7 +2,7 @@ import { UnlistenFn } from "@tauri-apps/api/event";
 import { WindowWrapper } from "../../lib/Window";
 import { IWindowState, WindowStateConfig } from "./types";
 import { Opacity } from "../../decorators/Window/style/opacity";
-import { FullScreenWidth } from "../../decorators/Window/layout/size";
+import { WidthPercentage } from "../../decorators/Window/layout/size";
 
 export class FixedState implements IWindowState {
     protected config: WindowStateConfig;
@@ -53,7 +53,7 @@ export class FixedState implements IWindowState {
         if (this.config.size === undefined) {
             const currentSize = await this.window.getSize();
             this.window.setSize(currentSize.width, 400);
-            await this.window.decorateWith(new FullScreenWidth());
+            await this.window.decorateWith(new WidthPercentage(1));
             return;
         }
 
