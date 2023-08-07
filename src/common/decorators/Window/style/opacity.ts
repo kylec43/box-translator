@@ -6,6 +6,9 @@ export class Opacity implements IWindowDecoration {
     private value: number;
 
     constructor(value: number) {
+        if (value > 1 || value < 0) {
+            throw new RangeError('Opacity value must be between 0 and 1');
+        } 
         this.value = value;
     }
 
