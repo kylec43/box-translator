@@ -77,7 +77,7 @@ export class WindowWrapper {
         this.state?.cleanUp();
         this.state = state;
         this.state.setContext(this);
-        this.state.act();
+        this.state.transformContext();
     }
 }
 

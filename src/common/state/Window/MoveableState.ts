@@ -23,7 +23,7 @@ export class MoveableState implements IWindowState {
         this.window = window;
     } 
 
-    async act(): Promise<void> {
+    async transformContext(): Promise<void> {
         this.assertWindowIsSet();
 
         const alwaysOnTop = this.config.alwaysOnTop ?? false;

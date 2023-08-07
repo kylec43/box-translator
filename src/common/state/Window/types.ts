@@ -2,7 +2,7 @@ import { WindowWrapper } from "../../lib/Window";
 
 export interface IWindowState {
     setContext(window: WindowWrapper): void;
-    act(): Promise<void>;
+    transformContext(): Promise<void>;
     cleanUp(): void;
 }
 
