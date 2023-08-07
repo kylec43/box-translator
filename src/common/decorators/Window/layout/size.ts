@@ -1,5 +1,5 @@
 import { getScreenSize } from "../../../ipc/invoke";
-import { WindowWrapper } from "../../../lib/Window";
+import { WindowWrapper } from "../../../lib/Window/Window";
 import { IWindowDecoration } from "../types";
 
 

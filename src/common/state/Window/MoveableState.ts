@@ -1,6 +1,6 @@
 import { WidthPercentage } from "../../decorators/Window/layout/size";
 import { Opacity } from "../../decorators/Window/style/opacity";
-import { WindowWrapper } from "../../lib/Window";
+import { WindowWrapper } from "../../lib/Window/Window";
 import { IWindowState, WindowStateConfig } from "./types";
 
 export class MoveableState implements IWindowState {
@@ -27,7 +27,7 @@ export class MoveableState implements IWindowState {
         this.assertWindowIsSet();
 
         const alwaysOnTop = this.config.alwaysOnTop ?? false;
-        const opacity = this.config.opacity ?? 0.5;
+        const opacity = this.config.opacity ?? this.window.getOpacity() ?? 0.5;
         const currentPosition = await this.window.getPosition(); 
         const posX = this.config.position?.x ?? currentPosition.x;
         const posY = this.config.position?.y ?? currentPosition.y;

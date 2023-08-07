@@ -1,4 +1,4 @@
-import { WindowWrapper } from "../../../lib/Window";
+import { WindowWrapper } from "../../../lib/Window/Window";
 import { IWindowDecoration } from "../types";
 
 export class FixedPosition implements IWindowDecoration {

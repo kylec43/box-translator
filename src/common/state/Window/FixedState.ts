@@ -1,5 +1,5 @@
 import { UnlistenFn } from "@tauri-apps/api/event";
-import { WindowWrapper } from "../../lib/Window";
+import { WindowWrapper } from "../../lib/Window/Window";
 import { IWindowState, WindowStateConfig } from "./types";
 import { Opacity } from "../../decorators/Window/style/opacity";
 import { WidthPercentage } from "../../decorators/Window/layout/size";
@@ -29,7 +29,7 @@ export class FixedState implements IWindowState {
         this.assertWindowIsSet();
 
         const alwaysOnTop = this.config.alwaysOnTop ?? true;
-        const opacity = this.config.opacity ?? 0.5;
+        const opacity = this.config.opacity ?? this.window.getOpacity() ?? 0.5;
         const posX = this.config.position?.x ?? 0;
         const posY = this.config.position?.y ?? 0;
 

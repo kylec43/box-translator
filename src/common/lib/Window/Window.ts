@@ -6,9 +6,9 @@ import {
 } from "@tauri-apps/api/window";
 
 import { EventCallback, Event, UnlistenFn } from "@tauri-apps/api/event";
-import { IWindowDecoration } from "../decorators/Window/types";
-import { IWindowState } from "../state/Window/types";
-import { FixedState } from "../state/Window/FixedState";
+import { IWindowDecoration } from "../../decorators/Window/types";
+import { IWindowState } from "../../state/Window/types";
+import { FixedState } from "../../state/Window/FixedState";
 
 export class WindowWrapper {
     private appWindow: WebviewWindow;
@@ -55,6 +55,22 @@ export class WindowWrapper {
 
     async getPosition(): Promise<PhysicalPosition> {
         return this.appWindow.innerPosition();
+    }
+
+    getOpacity(): number | null {
+        const computedStyle = window.getComputedStyle(document.body);
+        const bgColor = computedStyle.backgroundColor;
+        const rgbaValues = bgColor.match(/\d+\.?\d*/g);
+        if (!rgbaValues) {
+            return null;
+        }
+
+        const a = rgbaValues[3];
+        if (isNaN(Number(a))) {
+            return null
+        }
+
+        return parseFloat(a);
     }
 
     async show(): Promise<void> {
