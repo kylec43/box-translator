@@ -1,6 +1,6 @@
-import { WidthPercentage } from "../../decorators/Window/layout/size";
-import { Opacity } from "../../decorators/Window/style/opacity";
-import { WindowWrapper } from "../../lib/Window/Window";
+import { WidthPercentage } from "../../decorators/window/layout/size";
+import { Opacity } from "../../decorators/window/style/opacity";
+import { WindowWrapper } from "../../lib/window/window";
 import { IWindowState, WindowStateConfig } from "./types";
 
 export class MoveableState implements IWindowState {

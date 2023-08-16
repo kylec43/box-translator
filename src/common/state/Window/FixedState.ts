@@ -1,7 +1,7 @@
-import { WindowWrapper } from "../../lib/Window/Window";
+import { WindowWrapper } from "../../lib/window/window";
 import { IWindowState, WindowStateConfig } from "./types";
-import { Opacity } from "../../decorators/Window/style/opacity";
-import { WidthPercentage } from "../../decorators/Window/layout/size";
+import { Opacity } from "../../decorators/window/style/opacity";
+import { WidthPercentage } from "../../decorators/window/layout/size";
 
 export class FixedState implements IWindowState {
     protected config: WindowStateConfig;

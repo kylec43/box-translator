@@ -5,9 +5,10 @@ import {
     appWindow as tauriAppWindow
 } from "@tauri-apps/api/window";
 
-import { IWindowDecoration } from "../../decorators/Window/types";
-import { IWindowState } from "../../state/Window/types";
-import { FixedState } from "../../state/Window/FixedState";
+import { IWindowDecoration } from "../../decorators/window/types";
+import { IWindowState } from "../../state/window/types";
+import { FixedState } from "../../state/window/fixedState";
+import { getOpacityOfElement } from "../../util/styleUtil";
 
 export class WindowWrapper {
     private appWindow: WebviewWindow;
@@ -57,19 +58,7 @@ export class WindowWrapper {
     }
 
     getOpacity(): number | null {
-        const computedStyle = window.getComputedStyle(document.body);
-        const bgColor = computedStyle.backgroundColor;
-        const rgbaValues = bgColor.match(/\d+\.?\d*/g);
-        if (!rgbaValues) {
-            return null;
-        }
-
-        const a = rgbaValues[3];
-        if (isNaN(Number(a))) {
-            return null
-        }
-
-        return parseFloat(a);
+        return getOpacityOfElement(document.body);
     }
 
     async show(): Promise<void> {

@@ -1,4 +1,4 @@
-import { WindowWrapper } from "../../lib/Window/Window";
+import { WindowWrapper } from "../../lib/window/window";
 
 export interface IWindowState {
     setContext(window: WindowWrapper): void;

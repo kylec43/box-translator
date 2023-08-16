@@ -1,5 +1,5 @@
-import { appWindow } from "./common/lib/Window/Window";
-import { MoveableState } from "./common/state/Window/MoveableState";
+import { appWindow } from "./common/lib/window/window";
+import { MoveableState } from "./common/state/window/moveableState";
 
 bootstrap();
 

@@ -1,4 +1,4 @@
-import { WindowWrapper } from "../../../lib/Window/Window";
+import { WindowWrapper } from "../../../lib/window/window";
 import { IWindowDecoration } from "../types";
 
 
